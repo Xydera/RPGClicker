@@ -1,0 +1,386 @@
+/* ===========================
+   STATS MENU
+   =========================== */
+#playerStats {
+  display: flex;
+  flex-direction: column;   /* stack stat rows vertically */
+  background-color: #444;
+  border-radius: 10px;
+  border: 2px solid black;
+  padding: 1rem;
+}
+
+#playerStats h3#statPoints {
+  margin-top: 0;
+  margin-bottom: 0.5rem; /* optional spacing below */
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+
+#playerStats .stat {
+  display: flex;
+  justify-content: space-between; /* text left, button right */
+  align-items: center;            /* vertically center text & button */
+  font-size: 1rem;
+  cursor: default;
+  padding: 0.2rem 0;              /* optional subtle padding */
+}
+
+#playerStats .stat p {
+  margin: 0;                       /* remove default <p> margin */
+}
+
+#playerStats .stat button {
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  color: inherit;
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-align: center;
+  cursor: pointer;
+  padding: 0 0.4rem;
+  transition: background-color 0.2s;
+}
+
+#playerStats .stat button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+#playerStats .respec {
+  text-align: center;
+  width: 100%;
+  margin-top: 0.5rem;   /* spacing above the respec button */
+}
+
+#playerStats .respec button {
+  background-color: darkred;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+}
+
+#playerStats .respec button:hover {
+  background-color: red;
+}
+
+
+
+/* ===============================
+   MENU STYLES
+   =============================== */
+
+.menu {
+  position: fixed;  /* fixed keeps it on screen */
+  top: 50%;         /* center vertically */
+  left: 50%;        /* center horizontally */
+  transform: translate(-50%, -50%); /* truly center */
+  background: #444;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid gold;
+  z-index: 70;
+  min-width: 200px;
+  max-width: 300px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.menu-container {
+  border: 2px solid gold;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.1s ease;
+}
+
+.menu-container.dragging {
+  opacity: 0.9;
+  transform: scale(0.99);
+}
+
+.menu-body button {
+  background: #444;
+  color: gold;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  margin-top: 6px;
+  cursor: pointer;
+}
+
+.menu-body button:hover {
+  background: #555;
+}
+
+
+.menuBtn {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  margin: 0.4rem 0;
+  font-weight: bold;
+  color: white;
+  background-color: #555;
+  border: 2px solid gold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#settingsMenu {
+  position: fixed;  /* fixed keeps it on screen */
+  top: 50%;         /* center vertically */
+  left: 50%;        /* center horizontally */
+  transform: translate(-50%, -50%); /* truly center */
+  background: #444;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid gold;
+  z-index: 70;
+  min-width: 400px;
+  max-width: 1000px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+#settingsMenu h2 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.keybind {
+  width: 130px;
+  text-align: center;
+  padding: 12px 12px;           /* slightly more padding */
+  color: #fff;                 /* white text */
+  background-color: #333;      /* dark background */
+  border-radius: 6px;          /* rounded corners */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* subtle shadow */
+  font-weight: bold;           /* optional: make text stand out */
+  user-select: none;           /* optional: prevent text selection */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* smooth hover effect */
+}
+
+.keybindDiv {
+  display: flex;            /* use flex layout */
+  gap: 12px;                /* spacing between keybinds */
+  justify-content: flex-start; /* align items to the start */
+  align-items: center;      /* vertically center boxes */
+  margin: 8px 0;            /* optional spacing around the row */
+}
+.menuBtn:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+#deleteSaveBtn {
+  color: red;
+  border: 2px solid red;
+}
+
+#deleteSaveBtn:hover {
+  background-color: darkred;
+}
+
+/* ===============================
+   Leaderboard
+   =============================== */
+
+#leaderboardMenu {
+  position: relative; /* instead of fixed */
+  left: 0;
+  top: 0;
+  transform: none;
+  background: rgba(25, 25, 35, 0.95);
+  color: white;
+  border-radius: 12px;
+  padding: 20px;
+  width: 550px;       /* wider table */
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+  z-index: 200;
+  backdrop-filter: blur(5px);
+}
+
+/* Scroll styling */
+#leaderboardMenu::-webkit-scrollbar {
+  width: 8px;
+}
+#leaderboardMenu::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+#leaderboardMenu::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.leaderboardTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 12px;
+  font-size: 0.95em;
+}
+
+.leaderboardTable th, .leaderboardTable td {
+  padding: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  text-align: center;
+}
+
+.rank-1 {
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.2), transparent);
+  box-shadow: 0 0 10px gold;
+}
+.rank-2 {
+  background: linear-gradient(90deg, rgba(192,192,192,0.15), transparent);
+  box-shadow: 0 0 8px silver;
+}
+.rank-3 {
+  background: linear-gradient(90deg, rgba(205,127,50,0.15), transparent);
+  box-shadow: 0 0 6px #cd7f32;
+}
+
+/* Highlight the current player's row */
+tr.you {
+  background: linear-gradient(90deg, rgba(0, 123, 255, 0.2), transparent);
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.7);
+  border-left: 3px solid rgba(0, 123, 255, 0.8);
+}
+
+/* Responsive "menu" variants for small screens */
+@media (max-width: 480px) {
+  /* Make generic menus full-width near the bottom for quick access */
+  .menu {
+    position: fixed;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    top: auto;
+    transform: none;
+    border-radius: 12px;
+    padding: 10px;
+    min-width: auto;
+    max-width: none;
+    width: calc(100% - 16px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+  }
+
+  /* Settings becomes a centered, but constrained overlay on phones */
+  #settingsMenu {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 24px);
+    min-width: auto;
+    max-width: 92vw;
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  /* Tighten player stats so it fits vertically */
+  #playerStats {
+    padding: 0.6rem;
+    border-radius: 10px;
+    max-width: 100%;
+    width: 100%;
+  }
+  #playerStats .stat {
+    font-size: 0.95rem;
+    padding: 0.18rem 0;
+    gap: 8px;
+  }
+  #playerStats .respec button {
+    padding: 0.45rem;
+    font-size: 0.95rem;
+  }
+
+  /* Buttons and menu items stack and expand to touch-friendly widths */
+  .menu-body button,
+  .menuBtn,
+  #deleteSaveBtn {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .menu-container {
+    border-width: 1px;
+  }
+
+  .menuBtn {
+    margin: 0.3rem 0;
+    padding: 0.55rem 0.8rem;
+  }
+
+  /* Keybind boxes smaller on mobile */
+  .keybind {
+    width: 86px;
+    padding: 8px;
+    font-size: 0.95rem;
+  }
+  .keybindDiv { gap: 8px; flex-wrap: wrap; }
+
+  /* Leaderboard becomes full-width, scrollable modal */
+  #leaderboardMenu {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: calc(100% - 20px);
+    max-width: 94vw;
+    max-height: 78vh;
+    padding: 12px;
+    overflow-y: auto;
+    border-radius: 10px;
+  }
+  .leaderboardTable th, .leaderboardTable td {
+    padding: 6px;
+    font-size: 0.9em;
+  }
+}
+
+/* Extra small devices - further reductions */
+@media (max-width: 360px) {
+  .menu {
+    padding: 8px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+  }
+  .menuBtn { font-size: 0.95rem; padding: 8px; }
+  #settingsMenu { padding: 10px; }
+  .keybind { width: 72px; padding: 6px; font-size: 0.85rem; }
+  #playerStats h3#statPoints { font-size: 1.05rem; }
+  #leaderboardMenu { padding: 8px; max-height: 74vh; }
+}
+
+/* Landscape phones / small tablets - increase max-width but keep centered */
+@media (min-width: 481px) and (max-width: 768px) {
+  .menu {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: min(420px, 92vw);
+    padding: 12px 14px;
+  }
+  #settingsMenu {
+    width: min(680px, 94vw);
+    max-width: 94vw;
+    padding: 14px;
+  }
+  #leaderboardMenu {
+    position: relative;
+    width: min(720px, 94vw);
+    max-height: 82vh;
+    padding: 14px;
+  }
+}

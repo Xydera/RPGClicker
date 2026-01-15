@@ -1,0 +1,94 @@
+/* Base rarity class */
+.inventory-item,
+.equip-slot {
+  transition: all 0.2s ease;
+}
+
+/* Common (grey) */
+.rarity-common {
+  border-color: #888;
+  background-color: #111;
+  box-shadow: 0 0 6px #888;
+}
+
+/* Uncommon (green) */
+.rarity-uncommon {
+  border-color: #2ecc71;
+  background-color: #111;
+  box-shadow: 0 0 6px rgba(46, 204, 113, 0.5);
+}
+
+/* Rare (blue) */
+.rarity-rare {
+  border-color: #3498db;
+  background-color: #111;
+  box-shadow: 0 0 6px rgba(52, 152, 219, 0.5);
+}
+
+/* Epic (purple) */
+.rarity-epic {
+  border-color: #9b59b6;
+  background-color: #111;
+  box-shadow: 0 0 8px rgba(155, 89, 182, 0.6);
+}
+
+/* Legendary (orange) */
+.rarity-legendary {
+  border-color: #e67e22;
+  background-color: #111;
+  box-shadow: 0 0 8px rgba(230, 126, 34, 0.7);
+}
+
+/* Mythical (pink) */
+.rarity-mythical {
+  border-color: #e91e63;
+  background-color: #111;
+  box-shadow: 0 0 10px rgba(233, 30, 99, 0.7);
+}
+
+/* Celestial (gold) */
+.rarity-celestial {
+  border-color: #f1c40f;
+  background-color: #111;
+  box-shadow: 0 0 12px rgba(241, 196, 15, 0.8);
+}
+
+/* Common (grey) */
+.rarity-common #rarityLine {
+  color: #888;
+}
+
+/* Uncommon (green) */
+.rarity-uncommon #rarityLine {
+  color: #2ecc71;
+}
+
+/* Rare (blue) */
+.rarity-rare #rarityLine {
+  color: #3498db;
+}
+
+/* Epic (purple) */
+.rarity-epic #rarityLine {
+  color: #9b59b6;
+}
+
+/* Legendary (orange) */
+.rarity-legendary #rarityLine {
+  color: #e67e22;
+}
+
+/* Mythical (pink) */
+.rarity-mythical #rarityLine {
+  color: #e91e63;
+}
+
+/* Celestial (gold) */
+.rarity-celestial #rarityLine {
+  color: #f1c40f;
+}
+
+#rarityLine {
+  font-weight: bold;
+  font-size: 15px;
+}

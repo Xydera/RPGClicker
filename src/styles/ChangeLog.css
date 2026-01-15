@@ -1,0 +1,123 @@
+#changeLog {
+  position: fixed;
+  right: 16px;
+  bottom: 30px;
+  width: 340px;
+  max-height: 260px;
+  background: rgba(18,18,18,0.96);
+  color: #eee;
+  border: 2px solid rgba(255, 215, 0, 0.95);
+  border-radius: 8px;
+  padding: 8px 10px 12px 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+  z-index: 120;
+  font-size: 0.88rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  backdrop-filter: blur(2px);
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+
+/* header */
+#changeLog .cl-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+#changeLog .cl-title {
+  font-weight: 700;
+  color: #ffd86b;
+  font-size: 0.98rem;
+}
+#changeLog .cl-controls {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+/* collapse button (small) */
+#clCollapseBtn {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: #ddd;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+#clCollapseBtn:hover { background: rgba(255,255,255,0.05); }
+
+/* entries area with scrollbar */
+#changeLog .cl-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  padding-right: 6px;
+  max-height: 180px; /* keeps room for header & controls inside overall max-height */
+}
+
+/* entry */
+.cl-entry {
+  padding: 8px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.02);
+  color: #eaeaea;
+  line-height: 1.25;
+  font-size: 0.82rem;
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.02);
+}
+.cl-entry .ver { font-weight: 700; color: #ffd86b; display:block; margin-bottom:4px; }
+.cl-entry .date { font-size: 0.75rem; opacity: 0.6; margin-bottom:4px; }
+.cl-entry .notes { white-space: pre-wrap; }
+
+/* severity (optional styling per entry) */
+.cl-entry.info { border-left: 4px solid #2ecc40; }
+.cl-entry.warn { border-left: 4px solid #f1c40f; }
+.cl-entry.error { border-left: 4px solid #e74c3c; }
+
+/* collapsed state: small pill/handle */
+#changeLog.collapsed {
+  width: 160px;
+  height: 36px;
+  max-height: none;
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+#changeLog.collapsed .cl-header { width:100%; }
+#changeLog.collapsed .cl-entries { display:none; }
+#changeLog.collapsed .cl-title { font-size: 0.9rem; }
+
+/* small handle style while collapsed */
+#changeLog .cl-handle {
+  display: none;
+}
+#changeLog.collapsed .cl-handle {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: #ddd;
+  margin-top: 10px;
+  opacity: 0.9;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .changelog-mini{
+    right: 8px;
+    bottom: 260px;
+    width: 220px;
+    max-height: 180px;
+    font-size: 0.78rem;
+    padding: 6px;
+    border-radius: 6px;
+  }
+  #changeLog .cl-title { font-size: 0.92rem; }
+  #changeLog .cl-entries { max-height: 130px; }
+  .cl-entry { padding: 6px; font-size: 0.74rem; }
+  #changeLog.collapsed { width: 100px; height: 34px; }
+}

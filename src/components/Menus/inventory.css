@@ -1,0 +1,118 @@
+.inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* Optional: glowing border effect */
+.inventory-item {
+  width: 64px;
+  height: 64px;
+  border: 2px solid #555;
+  border-radius: 8px;
+  background: #222;
+  cursor: pointer;
+  position: relative;
+  transition: box-shadow 0.2s ease, transform 0.1s ease;
+}
+.inventory-item:hover {
+  transform: scale(1.05);
+}
+.inventory-item.selected {
+  border-color: #fff;
+  background: #444;
+}
+
+.item-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.item-qty {
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+/* --- Rarity Colors --- */
+.rarity-common { border-color: #888; }
+.rarity-uncommon { border-color: #4caf50; }
+.rarity-rare { border-color: #2196f3; }
+.rarity-epic { border-color: #9c27b0; }
+.rarity-legendary { border-color: #ff9800; }
+.rarity-mythical { border-color: #ff0000; }
+.rarity-celestial { border-color: #7700ff; }
+
+
+.inventory-item.rarity-common:hover    { box-shadow: 0 0 10px #888; }
+.inventory-item.rarity-uncommon:hover  { box-shadow: 0 0 10px #4caf50; }
+.inventory-item.rarity-rare:hover      { box-shadow: 0 0 10px #2196f3; }
+.inventory-item.rarity-epic:hover      { box-shadow: 0 0 10px #9c27b0; }
+.inventory-item.rarity-legendary:hover { box-shadow: 0 0 10px #ff9800; }
+.inventory-item.rarity-mythical:hover  { box-shadow: 0 0 10px #ff0000; }
+.inventory-item.rarity-celestial:hover { box-shadow: 0 0 10px #7700ff; }
+
+/* action bar */
+.inventory-actions {
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #555;
+  text-align: center;
+}
+.inventory-actions .selected-name {
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.inventory-actions .actions button {
+  margin: 0 4px;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 4px;
+  background: #555;
+  color: white;
+  cursor: pointer;
+}
+.inventory-actions .actions button:hover {
+  background: #777;
+}
+
+.equipment-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.slot {
+  background: #333;
+  border-radius: 8px;
+  padding: 8px;
+  border: 1px solid #555;
+}
+
+.slot-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: #ccc;
+}
+
+.slot-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.slot-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  border: 1px solid #666;
+}
+
+.slot-empty {
+  font-style: italic;
+  opacity: 0.7;
+}
+
+.smalltext {
+  font-size: 0.8rem;
+  color: #aaa;
+}

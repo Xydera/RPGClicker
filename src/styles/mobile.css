@@ -1,0 +1,266 @@
+/* src/styles/mobile-game.css */
+
+/* sensible defaults for mobile */
+:root {
+  --bg: #242424;
+  --panel: rgba(255,255,255,0.03);
+  --accent: #ffb86b;
+  --muted: rgba(255,255,255,0.6);
+  --danger: #ff6b6b;
+  --glass: rgba(255,255,255,0.04);
+  --health: #ff5555;
+}
+
+* {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Disable double-tap zooming (if you’re using mobile browsers) */
+html, body {
+  touch-action: manipulation;
+}
+
+/* container */
+.mobile-root {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+/* Top bar */
+.mobile-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.mini-player { display:flex; flex-direction:column; gap:2px; font-size:13px; }
+.player-name { font-weight:600; letter-spacing:0.2px; }
+.player-level { font-size:12px; color:var(--muted); }
+.player-hp { font-size:12px; color:var(--health); }
+
+/* XP bar center */
+.xp-bar-wrap {
+  width: 42vw;
+  max-width: 220px;
+  height: 16px;
+  background: rgba(255,255,255,0.05);
+  border: 2px solid white;
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative; /* allow absolute centering for text */
+}
+.xp-bar { height:100%; background: linear-gradient(90deg, #78c0ff, #3b82f6); }
+
+#xpBarText{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 0 4px rgba(0,0,0,0.6);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* parent container — full height column for mobile layout */
+.mobile-creature-area {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;         /* stack creature + equip */
+  justify-content: center;        /* center creature vertically */
+  align-items: center;            /* center creature horizontally */
+  height: 40vh;                   /* adjust as needed */
+  width: 100vw;
+  background: radial-gradient(circle at center, #222 0%, #000 80%);
+  overflow: hidden;
+  touch-action: manipulation;
+  padding: 6px;
+}
+
+/* the CreatureDisplay (whatever it renders) stays centered */
+.mobile-creature-area > *:not(.equipDisplay):not(.attack-hint):not(.float-dmg-layer) {
+  z-index: 2;
+}
+
+#gameCenter{
+  position: relative;
+  width: 100vw;
+  height: 40vh;
+  display: flex;
+  align-items: center;
+  pointer-events: none; /* prevent interfering with touch events */
+  top: 2%;
+}
+
+
+#gameScreen{
+  width: 100%;
+  height: 20vh;
+  display: flex;
+  margin-top: 20%;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none; /* prevent interfering with touch events */
+}
+
+
+/* optional "Tap to attack" overlay */
+.attack-hint {
+  position: absolute;
+  top: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  color: rgba(255,255,255,0.6);
+  text-shadow: 0 0 5px #000;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* anchor to bottom center, but don't let children flex-grow */
+.equipDisplay {
+  position: absolute;
+  left: 50%;
+  bottom: calc(56px + env(safe-area-inset-bottom, 0px)); /* sits above bottom controls/safe area */
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 420px;
+  padding: 6px 10px;
+  font-size: 12px;
+  z-index: 6;
+  pointer-events: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.22);
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+/* Prevent children from stretching and keep icons tappable */
+.equipDisplay > * {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: 40vw;
+}
+
+/* sensible icon size for touch */
+.equippedWeaponDisplay img {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  user-select: none;
+}
+
+/* floating damage layer */
+.float-dmg-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.coinIcon {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  position: relative;
+  margin-right: 4px;
+}
+
+/* floating damage layer */
+.float-dmg-layer, .float-dmg-layer * { pointer-events: none; }
+.float-dmg {
+  position: absolute;
+  transform: translate(-50%, -50%) translateY(0);
+  font-weight: 700;
+  font-size: 16px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  opacity: 0;
+  transition: transform 400ms cubic-bezier(.22,.9,.3,1), opacity 300ms;
+  white-space: nowrap;
+  padding: 2px 6px;
+  border-radius: 8px;
+  color: #fff;
+}
+.float-dmg.animate { opacity: 1; transform: translate(-50%, -120%) scale(1.05); }
+.float-dmg.fade { opacity: 0; transform: translate(-50%, -140%) scale(0.9); }
+.float-dmg.crit { color: gold; font-size: 20px; text-shadow: 0 3px 10px rgba(0,0,0,0.8); }
+.float-dmg.hit { color: #ffdddd; }
+.float-dmg.heal { color: #8affb2; }
+
+/* bottom panel with equip + attack */
+.mobile-bottom-panel {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 8px;
+  padding: 10px;
+  background: var(--panel);
+  border-top: 1px solid rgba(255,255,255,0.03);
+}
+
+/* quick actions */
+.quick-actions { display:flex; gap:4px; justify-content:center; align-items:center; }
+.qa-btn {
+  min-width:90px;
+  height:44px;
+  border-radius:10px;
+  background: var(--glass);
+  border: 1px solid rgba(255,255,255,0.03);
+  font-weight:700;
+  font-size:13px;
+  padding:0 8px;
+  align-items: center;
+}
+
+/* bottom nav smaller */
+.mobile-nav {
+  display:flex;
+  gap:8px;
+  padding: 8px;
+  justify-content:space-around;
+  background: rgba(0,0,0,0.12);
+  border-top: 1px solid rgba(255,255,255,0.02);
+}
+.mobile-nav button {
+  background: transparent;
+  color: var(--muted);
+  border: none;
+  font-weight:700;
+}
+
+/* compact meta row */
+.mobile-bottom-meta {
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  padding: 6px 10px;
+  font-size:12px;
+  color: var(--muted);
+}
+
+/* tiny loader */
+.mobile-loading { padding: 20px; text-align:center; color: var(--muted); }
+
+/* small screens: increase tappable sizes */
+@media (max-width: 360px) {
+  .big-attack-button { height: 64px; font-size:20px; }
+  .qa-btn { min-width:52px; height:52px; }
+  .attack-hint { font-size:13px; }
+}

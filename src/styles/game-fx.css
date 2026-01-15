@@ -1,0 +1,149 @@
+/* src/styles/game-fx.css */
+
+/* ---- Floating numbers common ---- */
+.fx-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 1000;
+}
+
+/* Base number style */
+.float-number {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.7);
+  will-change: transform, opacity;
+  user-select: none;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2px);
+  letter-spacing: 0.6px;
+  font-size: 16px;
+  opacity: 0;
+  animation: fx-pop 920ms cubic-bezier(.22,.9,.3,1) forwards;
+}
+
+/* slight pop and rise */
+@keyframes fx-pop {
+  0%   { opacity: 0; transform: translate(-50%,-50%) translateY(0) scale(0.85); }
+  18%  { opacity: 1; transform: translate(-50%,-50%) translateY(-6px) scale(1.12); }
+  62%  { transform: translate(-50%,-50%) translateY(-36px) scale(1.02); opacity: .96; }
+  100% { transform: translate(-50%,-50%) translateY(-64px) scale(1.02); opacity: 0; }
+}
+
+/* crits */
+.float-number.crit {
+  color: #ffd86b;
+  font-size: 20px;
+  text-shadow:
+    0 1px 0 rgba(0,0,0,0.8),
+    0 0 8px rgba(255,200,80,0.25);
+  background: linear-gradient(180deg, rgba(255,230,150,0.06), rgba(0,0,0,0.12));
+  border: 1px solid rgba(255,200,80,0.12);
+  filter: drop-shadow(0 2px 6px rgba(255,160,30,0.08));
+  animation: fx-critflash 920ms cubic-bezier(.2,.9,.3,1) forwards;
+}
+
+/* crit flash pulse */
+@keyframes fx-critflash {
+  0% { transform: translate(-50%,-50%) translateY(0) scale(0.9); opacity: 0; filter: blur(0px); }
+  12% { transform: translate(-50%,-50%) translateY(-8px) scale(1.26); opacity: 1; }
+  48% { transform: translate(-50%,-50%) translateY(-44px) scale(1.04) ; opacity: .9; }
+  100% { transform: translate(-50%,-50%) translateY(-74px) scale(1.04); opacity: 0; }
+}
+
+/* gold pop style (big drop number) */
+.gold-pop {
+  background: linear-gradient(180deg, rgba(20,12,0,0.12), rgba(0,0,0,0.16));
+  color: #ffdd66;
+  border: 1px solid rgba(255,200,100,0.14);
+  font-size: 15px;
+  padding: 3px 6px;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.6);
+  animation: gold-pop 980ms cubic-bezier(.16,.86,.31,1) forwards;
+}
+@keyframes gold-pop {
+  0% { opacity: 0; transform: translate(-50%,-50%) translateY(0) scale(0.9); }
+  20% { opacity: 1; transform: translate(-50%,-50%) translateY(-10px) scale(1.12); }
+  70% { transform: translate(-50%,-50%) translateY(-40px) scale(1.02); opacity: .9; }
+  100% { transform: translate(-50%,-50%) translateY(-70px) scale(1.02); opacity: 0; }
+}
+
+/* xp/gold micro small floats on kill */
+.reward-pop {
+  position: absolute;
+  transform: translate(-50%,-50%);
+  font-weight: 700;
+  font-size: 13px;
+  top: 260px;
+  left: 250px;
+  padding: 2px 6px;
+  border-radius: 5px;
+  pointer-events: none;
+  background: rgba(0,0,0,0.28);
+  color: #dfefff;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.6);
+  animation: reward-pop 920ms ease-out forwards;
+}
+.reward-pop.gold { color: #ffdf88; }
+.reward-pop.xp { color: #a0e9b8; }
+
+@keyframes reward-pop {
+  0% { opacity: 0; transform: translate(-50%,-50%) translateY(0) scale(0.85); }
+  18% { opacity: 1; transform: translate(-50%,-50%) translateY(-10px) scale(1.05); }
+  100% { opacity: 0; transform: translate(-50%,-50%) translateY(-38px) scale(1.05); }
+}
+
+/* small particle burst */
+.fx-particle {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  pointer-events: none;
+  transform-origin: center;
+  animation: particle-fade 520ms linear forwards;
+  mix-blend-mode: screen;
+}
+.fx-particle.small { width: 5px; height: 5px; opacity: 0.85; }
+.fx-particle.gold { background: radial-gradient(circle, rgba(255,240,170,1) 0%, rgba(255,200,60,0.8) 60%); }
+
+@keyframes particle-fade {
+  0% { opacity: 1; transform: translate(0,0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--dx, 0px), var(--dy, -30px)) scale(0.6); }
+}
+
+/* HUD number (enemy -> player) */
+.hud-fx-layer {
+  position: relative;
+  z-index: 1200;
+  pointer-events: none;
+}
+.hud-damage {
+  position: absolute;
+  right: 14px;
+  top: 10px;
+  transform: translate(0, 0);
+  font-weight: 800;
+  font-size: 20px;
+  color: #ffb3b3;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.6);
+  animation: hud-damage-pop 920ms cubic-bezier(.2,.9,.3,1) forwards;
+}
+@keyframes hud-damage-pop {
+  0% { opacity: 0; transform: translateY(0) scale(.9); }
+  20% { opacity: 1; transform: translateY(-10px) scale(1.08); }
+  100% { opacity: 0; transform: translateY(-36px) scale(1.06); }
+}

@@ -1,0 +1,47 @@
+#log {
+  position: fixed;
+  bottom: 50px;
+  left: 15px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 9999;
+  font-size: 0.9rem;
+  color: white;
+  pointer-events: none;
+}
+
+.log-entry {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 6px 10px;
+  border-radius: 4px;
+  opacity: 1;
+}
+
+.log-entry.info {
+  border-left: 3px solid #00bfff;
+}
+.log-entry.warn {
+  border-left: 3px solid #ffaa00;
+}
+.log-entry.error {
+  border-left: 3px solid #ff5555;
+}
+
+/* Mobile logger tweaks */
+@media (max-width: 768px) {
+  #log {
+    left: 35vw;
+    bottom: 140px;
+    width: 200px;
+    font-size: 0.75rem;
+    gap: 6px;
+  }
+  .log-entry {
+    padding: 6px 8px;
+    border-radius: 6px;
+    background: rgba(0,0,0,0.6);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  }
+}

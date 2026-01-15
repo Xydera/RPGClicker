@@ -1,0 +1,201 @@
+/* ========= TOP LEFT - Player Info ========== */
+#playerInfo {
+  border: 2px solid black;
+  background-color: #444;
+  padding: 1rem;
+  border-radius: 10px;
+  min-width: 400px;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* reduce spacing between sections */
+  box-sizing: border-box;
+}
+
+#moneyDiv {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.3rem; /* small spacing between coin icon and amount */
+  margin-top: 2px;
+}
+
+#money {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#coinIcon {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  position: relative;
+  margin-right: 2px;
+}
+
+#levelInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#levelInfo h2,
+#levelInfo h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+#levelIcon {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}
+
+/* ========= HEALTH BAR ========= */
+#healthContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* reduced gap to tighten layout */
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+}
+
+#health {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #eee;
+}
+
+#healthBarContainer {
+  flex: 1; /* allow bar to fill available space */
+  height: 1.3rem;
+  background-color: #2f2f2f;
+  border: 1px solid white;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), 0 2px 6px rgba(0,0,0,0.35);
+}
+
+#healthBarFill {
+  height: 100%;
+  width: 0%;
+  transition: width 300ms ease-in-out;
+  background: linear-gradient(90deg, #7be76a 0%, #57b846 60%, #3fa33a 100%);
+  box-shadow: inset 0 -6px 12px rgba(0,0,0,0.15);
+}
+
+#healthBarText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.5);
+  pointer-events: none;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* ========= XP BAR ========= */
+#xpBarContainer {
+  width: 100%;
+  height: 1.2rem;
+  background-color: #2f2f2f;
+  border: 1px solid white;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), 0 2px 6px rgba(0,0,0,0.35);
+  margin-top: 0.25rem; /* tighter spacing */
+}
+
+#xpBarFill {
+  height: 100%;
+  width: 0%;
+  transition: width 300ms ease-in-out;
+  background: linear-gradient(90deg, #7be76a 0%, #57b846 60%, #3fa33a 100%);
+  box-shadow: inset 0 -6px 12px rgba(0,0,0,0.15);
+}
+
+#xpBarText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.5);
+  pointer-events: none;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* ========= PLAYER NAME ========= */
+#playerName {
+  font-size: 2.2rem; /* slightly smaller for better fit */
+  font-weight: bold;
+  margin: 0;
+  line-height: 1.1;
+  color: #fff;
+  overflow-wrap: break-word; /* prevent overflow on small screens */
+}
+
+#nameInput {
+  padding: 0.4rem 0.6rem; /* a bit more padding for comfort */
+  font-size: 1.8rem;      /* slightly smaller, consistent with #playerName */
+  background-color: #444;
+  width: 100%;
+  box-sizing: border-box;
+  color: white;
+  font-weight: bold;
+  border: 2px solid #666; /* subtle border for focus visibility */
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#nameInput:focus {
+  border-color: gold;
+  box-shadow: 0 0 6px rgba(255, 215, 0, 0.7);
+}
+
+/* ========= TOOLTIP ========= */
+.nameSectionTooltip {
+  position: relative;
+  display: inline-block;
+  cursor: help; /* optional: show user it’s interactive */
+}
+
+/* Tooltip bubble */
+.nameSectionTooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%; /* position above the element */
+  left: 50%;    /* center horizontally */
+  transform: translateX(-50%) translateY(-4px);
+  background: rgba(20, 20, 20, 0.9);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 6px;
+  line-height: 1.2;
+  white-space: nowrap;
+  pointer-events: none;
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 9999;
+}
+
+/* Fade in on hover or focus */
+.nameSectionTooltip:hover::after,
+.nameSectionTooltip:focus::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-8px); /* slightly higher for clarity */
+}

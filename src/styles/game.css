@@ -1,0 +1,333 @@
+.hidden {
+  display: none !important;
+  pointer-events: none;
+}
+/* ===============================
+   RESET / GLOBAL STYLES
+   =============================== */
+
+* {
+  cursor: default;
+}
+
+button {
+  cursor: default;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  font-family: sans-serif;
+  font-size: 16px; /* match your old environment */
+  zoom: 1;
+}
+
+#gameContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100vw !important;           /* Force full viewport width */
+  height: 100vh;           /* Fill full screen height */
+  box-sizing: border-box;
+  overflow: hidden;        /* optional: remove scrollbars */
+}
+
+#topSection, #bottomSection, #gameCenter, #shopSection {
+  width: 98%;
+}
+
+#equippedDisplay {
+  display: "flex";
+  align-items: "center"; 
+  gap: 8;
+}
+
+/* ===============================
+   PLAYER PANEL STYLES
+   =============================== */
+
+#topSection {
+  position: relative;        /* allows absolute positioning inside */
+  display: flex;
+  justify-content: space-between; /* left/right spread */
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 1rem;
+}
+
+/* Left section: normal flex flow */
+#topSection .left {
+  flex: 0 0 auto;
+  
+}
+
+/* Right section: normal flex flow */
+#topSection .right {
+  flex: 0 0 auto;
+  padding: 2px;
+}
+
+/* Center section: absolutely centered */
+#topSection .center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  top: 0; /* align top with other sections */
+}
+
+
+
+
+/* ========= TOP CENTER - Game Center ========== */
+#gameCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 40%;
+  text-align: center;
+  min-width: 300px;
+  max-width: 400px;
+}
+
+.sword {
+  width: 60%;
+  max-width: 400px;
+  height: auto;
+  transition: transform 0.3s;
+  pointer-events: auto;
+}
+
+.sword:active {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+#monster h1, #monster h3 {
+  margin-bottom: 0.5rem;
+}
+
+
+/* ===============================
+   BOTTOM SECTION
+   =============================== */
+#bottomSection {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex: 0 0 auto;
+  min-height: 80px;
+}
+
+/* ========= BOTTOM LEFT - Log Section ========== */
+#log {
+  margin-left: 1rem;
+  color: white;
+}
+
+/* ===============================
+   TOOLTIP
+   =============================== */
+
+.tooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+/* Tooltip bubble */
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 20, 20, 0.9);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;     /* ✅ fixed size, not inherited */
+  line-height: 1.2;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 9999;
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+  transform: translate(-50%, -4px);
+}
+
+/* ========== LEVEL UP TOOLTIP ========== */
+#levelTooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  font-size: 0.9rem;
+  z-index: 10;
+}
+
+#levelTooltip .tooltip:hover::after {
+  opacity: 1;
+  transform: translateY(-4px);
+}
+
+/* ========== STATS MENU TOOLTIP ========== */
+#playerStats .respec.tooltip::after {
+  top: 100%;
+  left: 50%;
+  bottom: auto;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  font-size: 0.9em;
+  z-index: 10;
+  transform: translateX(-50%) translateY(8px);
+}
+
+#playerStats .respec.tooltip:hover::after {
+  opacity: 1;
+}
+
+/* ===============================
+   OVERLAY
+   =============================== */
+
+#overlay {
+  position: fixed;
+  inset: 0;                /* shorthand for top:0; right:0; bottom:0; left:0 */
+  background: rgba(0, 0, 0, 0.356);
+  z-index: 60;
+}
+#versionNumber
+{
+	position:absolute;
+	left:0px;
+	bottom:0px;
+	opacity:0.5;
+	margin:8px;
+	font-size:22px;
+	z-index:1000000001;
+  font-weight: bold;
+}
+/* ========== ALERT BOX ========== */
+#alertBox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #444;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: 2px solid gold;
+  z-index: 80;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column; /* Stack title, paragraph, buttons vertically */
+  align-items: stretch;
+  gap: 0.5rem;
+  width: 300px;
+}
+
+#alertBox h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+#alertBox p {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  text-align: center;
+}
+
+#alertBox .alert-generated {
+  min-width: 80px;
+  padding: 0.4rem 1rem;
+  font-weight: bold;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: #555;
+  color: white;
+  margin: 0 8px;
+}
+/* Top-right close button */
+#alertCloseBtn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+#alertBox .alert-generated:first-child {
+  background: #2ecc40;
+}
+
+#alertBox .alert-generated:last-child {
+  background: #e74c3c;
+}
+
+#alertBox .alert-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.2rem;
+}
+
+/* ===============================
+   RESPONSIVE MEDIA QUERIES
+   =============================== */
+
+@media (max-width: 600px) {
+  .stats-menu {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  #overlay { display: none; }
+}
+
+/* responsive: reduce width on small screens */
+@media (max-width: 480px) {
+  #changeLog { right: 8px; bottom: 8px; width: 90%; max-width: 320px; }
+  #changeLog.collapsed { width: 120px; }
+}
+
+/* optional: custom scrollbar (WebKit) */
+#changeLog .cl-entries::-webkit-scrollbar { width: 8px; }
+#changeLog .cl-entries::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.06);
+  border-radius: 8px;
+}
+
